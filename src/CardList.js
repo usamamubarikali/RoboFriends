@@ -6,7 +6,7 @@ const CardList = ({ robos }) => {
         <div>
             {
                 robos.map((user)=>{
-                    return <Card props = {user}/>
+                    return <Card key = { user.id } props = {user}/>
                 })
             }
         </div>

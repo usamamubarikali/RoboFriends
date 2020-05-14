@@ -20,9 +20,16 @@ class App extends Component {
     .then(response => response.json())
     .then(users => this.setState({robos:users}))
   }
+
+  onSearchChange = (event) => {
+    this.setState({searchfield: event.target.value})
+    console.log(event.target.value);
+  }
   
   render(){
-    console.log(this.state.robos)
+    const filteredRobos = this.state.robos.filter(robo => {
+      return robo.name.toLowerCase().includes(this.state.searchfield.toLowerCase())
+    })
     if(this.state.robos.length === 0){
       return (
         <div>
@@ -34,8 +41,8 @@ class App extends Component {
       return (
         <div className="App">
           <h1>RoboFriends</h1>
-          <SearchBox />
-          <CardList robos = { this.state.robos }/>
+          <SearchBox searchChange = { this.onSearchChange } />
+          <CardList robos = { filteredRobos }/>
         </div>
       );
   
