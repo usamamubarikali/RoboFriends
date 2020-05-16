@@ -4,6 +4,7 @@ import './App.css';
 import { Component } from 'react';
 import CardList from './CardList';
 import SearchBox from './SearchBox';
+import Scroll from './Scroll.js'
 
 class App extends Component {
   
@@ -23,14 +24,14 @@ class App extends Component {
 
   onSearchChange = (event) => {
     this.setState({searchfield: event.target.value})
-    console.log(event.target.value);
   }
   
   render(){
-    const filteredRobos = this.state.robos.filter(robo => {
-      return robo.name.toLowerCase().includes(this.state.searchfield.toLowerCase())
+    const { robos, searchfield } = this.state;
+    const filteredRobos = robos.filter(robo => {
+      return robo.name.toLowerCase().includes(searchfield.toLowerCase())
     })
-    if(this.state.robos.length === 0){
+    if(!robos.length){
       return (
         <div>
           <h1>Loading...</h1>
@@ -39,13 +40,14 @@ class App extends Component {
     }
     else{
       return (
-        <div className="App">
+        <div className="tc">
           <h1>RoboFriends</h1>
           <SearchBox searchChange = { this.onSearchChange } />
+          <Scroll>
           <CardList robos = { filteredRobos }/>
+          </Scroll>
         </div>
       );
-  
     }
   }
 }
