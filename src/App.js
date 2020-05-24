@@ -8,8 +8,8 @@ import Scroll from './Scroll.js'
 
 class App extends Component {
   
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {
       robos : [],
       searchfield: ''
